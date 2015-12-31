@@ -1,0 +1,34 @@
+---
+---
+
+{
+  "type": "FeatureCollection",
+  "features": [
+  {% for item in site.data.wendys %}
+    {
+     "type": "Feature",
+     "id":"{{ item.address | xml_escape }}",
+     "properties":{
+        "Name":"Wendys {{ item.city | xml_escape }}, {{ item.state | xml_escape }}, ",
+        "":"",
+        "Phone":"",
+        "Link":"",
+        "Address":"{{ item.address | xml_escape }}",
+        "Commentary":"",
+        "long":"{{ item.longitude | xml_escape }}",
+        "lat":"{{ item.latitude | xml_escape }}"
+     },
+     "type":"Feature",
+     "geometry":{
+        "type":"Point",
+        "coordinates":[
+           "{{ item.longitude | xml_escape }}",
+           "{{ item.latitude | xml_escape }}"
+        ]
+     }
+    }
+    {% unless forloop.last %},{% endunless %}
+   {% endfor %}
+
+  ]
+}
